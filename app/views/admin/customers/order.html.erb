@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 col-md-10">
+      <h3 class="my-5"><%= @customer.last_name + @customer.first_name %>さんの注文履歴</h3>
+      <%= render 'admin/customers/order_index', orders: @orders %>
+    </div>
+  </div>
+</div>

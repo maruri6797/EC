@@ -1,0 +1,37 @@
+<div class="container-fulid">
+  <div class="row">
+    <div class="col-3">
+      <div class="logo pt-2">
+        <%= link_to root_path do %>
+          <%= image_tag 'nagano-cake-logo.svg', size: '100x100' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-3 mt-4 text-center">
+      <% if customer_signed_in? %>
+        <p>ようこそ、<%= current_customer.last_name %>さん！</p>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <div class="row my-4">
+        <% if admin_signed_in? %>
+          <%= link_to "商品一覧", admin_items_path, class: 'col-2' %>
+          <%= link_to "会員一覧", admin_customers_path, class: 'col-2' %>
+          <%= link_to "注文履歴一覧", admin_path, class: 'col-3' %>
+          <%= link_to "ジャンル一覧", admin_genres_path, class: 'col-3' %>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'col-2' %>
+        <% elsif customer_signed_in? %>
+          <%= link_to "マイページ", customers_path, class: 'col-3' %>
+          <%= link_to "商品一覧", items_path, class: 'col-3' %>
+          <%= link_to "カート", cart_items_path, class: 'col-3' %>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'col-3' %>
+        <% else %>
+          <%= link_to "About", about_path, class: 'col-3' %>
+          <%= link_to "商品一覧", items_path, class: 'col-3' %>
+          <%= link_to "新規登録", new_customer_registration_path, class: 'col-3' %>
+          <%= link_to "ログイン", new_customer_session_path, class: 'col-3' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

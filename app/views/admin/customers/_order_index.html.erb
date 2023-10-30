@@ -1,0 +1,35 @@
+<% if orders.present? %>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>購入日時</th>
+      <%- if controller_name != 'homes' %>
+        <th>購入者</th>
+      <% end %>
+        <th>注文個数</th>
+        <th>注文ステータス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.each do |order| %>
+      <tr>
+        <td>
+          <%= link_to admin_order_path(order) do %>
+            <%= l order.created_at %>
+          <% end %>
+        </td>
+      <%- if controller_name != 'homes' %>
+        <td>
+          <%= link_to order_admin_customer_path(order.customer) do %>
+            <%= order.customer.last_name + order.customer.first_name %>
+          <% end %>
+        </td>
+      <% end %>
+        <td><%= order.order_details.sum(:amount) %></td>
+        <td><%= order.status_i18n %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate orders %>
+<% end %>
