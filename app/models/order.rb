@@ -3,9 +3,9 @@ class Order < ApplicationRecord
   has_many :order_details, dependent: :destroy
 
   enum status: { waiting: 0, paid_up: 1, making: 2, preparing: 3, shipped: 4 }
-  enum payment_method: { credit_card: 1, transfer: 2 }
+  enum payment_method: { credit_card: 0, transfer: 1 }
 
   def billing_amount
-    total_price + delivery_charge
+    self.total_price + self.delivery_charge
   end
 end

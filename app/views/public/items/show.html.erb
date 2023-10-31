@@ -5,7 +5,7 @@
     </div>
     <div class="col-6">
       <%= @item.name %>
-      <%= @item.explanation %>
+      <p><%= @item.explanation %></p>
       <h5>￥<%= @item.with_tax_price.to_s(:delimited) %></h5><p>(税込)</p>
       <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
         <%= f.label :amount, "個数選択" %>

@@ -4,27 +4,27 @@
     <div class="col-lg-10 col-md-8">
       <%= render 'layouts/error', obj: @item %>
       <%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
-        <div class="form-group row">
+        <div class="form-group">
           <%= f.label :image, "商品画像", class: 'col-3' %>
-          <%= f.file_field :image, accept: 'image/*', class: 'col-6' %>
+          <%= f.file_field :image, accept: 'image/*' %>
         </div>
-        <div class="form-group row">
+        <div class="form-group">
           <%= f.label :name, "商品名", class: 'col-3' %>
-          <%= f.text_field :name, placeholder: '商品名', class: 'col-6' %>
+          <%= f.text_field :name, placeholder: '商品名' %>
         </div>
-        <div class="form-group row">
+        <div class="form-group">
           <%= f.label :explanation, "商品説明", class: 'col-3 align-top' %>
-          <%= f.text_area :explanation, placeholder: 'ここに説明文を記述します', size: "30x5", class: 'col-6' %>
+          <%= f.text_area :explanation, placeholder: 'ここに説明文を記述します', size: "30x5" %>
         </div>
-        <div class="form-group row">
+        <div class="form-group">
           <%= f.label :genre_id, "ジャンル", class: 'col-3' %>
           <%= f.select :genre_id, options_from_collection_for_select(Genre.all, :id, :name) %>
         </div>
-        <div class="form-group row">
+        <div class="form-group">
           <%= f.label :price, "税抜価格", class: 'col-3' %>
-          <%= f.text_field :price, placeholder: '1000', class: 'col-6' %>円
+          <%= f.text_field :price, placeholder: '1000' %>円
         </div>
-        <div class="form-group row">
+        <div class="form-group">
           <%= f.label :is_sell, "販売ステータス", class: 'col-3' %>
           <%= f.radio_button :is_sell, true %>
           <%= f.label :is_sell, "販売中" %>

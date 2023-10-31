@@ -3,6 +3,7 @@
     <div class="col-9">
       <h3>商品一覧</h3>
       <%= render 'public/items/index', items: @items %>
+      <%= paginate @items %>
     </div>
   </div>
 </div>

@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2023_09_14_075714) do
   end
 
   create_table "customers", force: :cascade do |t|
-    t.string "last_namem", null: false
+    t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "last_name_kana", null: false
     t.string "first_name_kana", null: false

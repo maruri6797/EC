@@ -17,7 +17,7 @@
               <% @cart_items.each do |ci| %>
               <tr>
                 <td><%= image_tag ci.item.get_image(50, 30) %><%= ci.item.name %></td>
-                <td><%= ci.purchase_price.to_s(:delimited) %></td>
+                <td><%= ci.item.with_tax_price.to_s(:delimited) %></td>
                 <td><%= ci.amount %></td>
                 <td><%= ci.subtotal.to_s(:delimited) %></td>
               </tr>
@@ -33,7 +33,7 @@
             </tr>
             <tr>
               <th>商品合計</th>
-              <td><%= @order.total_price %></td>
+              <td><%= @order.total_price.to_s(:delimited) %></td>
             </tr>
             <tr>
               <th>請求金額</th>
@@ -47,7 +47,9 @@
       <h4>お届け先</h4>
       <%= @order.postal_code + @order.address %><br>
       <%= @order.name %>
-      <%= link_to "注文を確定する", complete_orders_path, class: 'btn btn-success' %>
+      <div class="text-center">
+        <%= link_to "注文を確定する", complete_orders_path, class: 'btn btn-success' %>
+      </div>
     </div>
   </div>
 </div>

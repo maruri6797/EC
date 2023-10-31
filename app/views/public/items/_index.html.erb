@@ -1,12 +1,14 @@
-<% items.each do |item| %>
-  <div class="row">
-    <%= link_to item_path(item) do %>
-      <%= image_tag item.get_image(200, 120) %>
-      <%= item.name %>
-    <% end %>
-    ￥<%= item.with_tax_price.to_s(:delimited) %>
-    <% if item.is_sell == false %>
-      売り切れ
-    <% end %>
-  </div>
-<% end %>
+<div class="row">
+  <% items.each do |item| %>
+    <div class="col-3">
+      <%= link_to item_path(item) do %>
+        <%= image_tag item.get_image(200, 120) %>
+      <% end %>
+      <%= link_to item.name, item_path(item) %>
+      ￥<%= item.with_tax_price.to_s(:delimited) %>
+      <% if item.is_sell == false %>
+        売り切れ
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+
   def new
     @order = Order.new
   end
@@ -11,7 +13,7 @@ class Public::OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @order_details = @order.order_details
   end
-  
+
   def create
     @order = current_customer.orders.new(order_params)
     cart_items = current_customer.cart_items
@@ -31,10 +33,15 @@ class Public::OrdersController < ApplicationController
       render :new
     end
   end
-  
+
   def confirm
     @order = Order.new(order_params)
     @cart_items = current_customer.cart_items
+    ary = []
+    @cart_items.each do |cart_item|
+      ary << cart_item.item.with_tax_price*cart_item.amount
+    end
+    @order.total_price = ary.sum
     if params[:order][:address_option] == "0"
       @order.postal_code = current_customer.postal_code
       @order.address = current_customer.address
@@ -46,11 +53,11 @@ class Public::OrdersController < ApplicationController
       @order.name = address.name
     end
   end
-  
+
   def complete
   end
-  
+
   def order_params
-    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :total_price)
+    params.require(:order).permit(:payment_method, :postal_code, :address, :name, :delivery_charge, :status, :total_pric)
   end
 end
