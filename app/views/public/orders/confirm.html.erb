@@ -43,12 +43,21 @@
         </div>
       </div>
       <h4>支払方法</h4>
-      <%= @order.payment_method %>
+      <%= @order.payment_method_i18n %>
       <h4>お届け先</h4>
       <%= @order.postal_code + @order.address %><br>
       <%= @order.name %>
-      <div class="text-center">
-        <%= link_to "注文を確定する", complete_orders_path, class: 'btn btn-success' %>
+      <div class="hidden_field">
+        <%= form_with model: @order, url: orders_path do |f| %>
+          <%= f.hidden_field :postal_code, :value => @order.postal_code %>
+          <%= f.hidden_field :address, :value => @order.address %>
+          <%= f.hidden_field :name, :value => @order.name %>
+          <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+          <%= f.hidden_field :delivery_charge, :value => @order.delivery_charge %>
+          <%= f.hidden_field :total_price, :value => @order.total_price %>
+          <%= f.hidden_field :status, :value => "waiting" %>
+          <%= f.submit "注文を確定する", class: "btn btn-primary" %>
+        <% end %>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12">
       <h3 class="m-5">注文情報入力</h3>
-      <%= form_with model: @order, url: confirm_orders_path do |f| %>
+      <%= form_with model: @order, url: confirm_orders_path, method: :get do |f| %>
         <h4>支払方法</h4>
         <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
         <%= f.label :payment_method_credit_card, Order.payment_methods_i18n[:credit_card] %>
